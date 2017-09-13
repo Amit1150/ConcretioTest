@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ConcretioTest.Models.Gist>
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2>Welcome</h2>
+
+<hr />
+
+<div class="col-md-12">
+    <p>Your Gist</p>
+</div>
+<div class="clearfix"></div>
+<div class="col-md-12 row">
+    <table class="table table-striped table-bordered" cellspacing="0" width="100%" id="tbl-gist">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Is Public</th>
+                <th>Created On</th>
+
+                <th>View</th>
+            </tr>
+        </thead>
+       <tbody>
+           @if (Model.Count() > 0)
+           {
+               foreach (var gist in Model)
+               {
+                   <tr>
+                       <td> @gist.id </td>
+                       <td>@(gist.description == "" ? "NA" : gist.description)</td>
+                       <td>@gist.IsPublic</td>
+                       <td>@gist.created_at.ToShortDateString()</td>
+                       <td><a href="@gist.html_url" target="_blank">View Gist</a></td>
+                   </tr>
+
+               }
+           }
+           else
+           {
+               <tr>
+                   <td colspan="5">You do not have any gist.</td>
+               </tr>
+           }
+       </tbody>
+
+    </table>
+</div>
+
+<hr />
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12">
+        <p>Add New Gist</p>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <label for="gistname">Description:</label>
+            <textarea id="txt-gist" class="form-control" name="gistname"></textarea>
+        </div>
+        <input type="button" class="btn btn-primary" id="btn-add-gist" value="Add"/>
+    </div>
+</div>
+
+@section scripts{
+   
+    <script>
+        $(function () {
+            $('#tbl-gist').dataTable({
+                "ordering": false
+            });
+        });
+    </script>
+}

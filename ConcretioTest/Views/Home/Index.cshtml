@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    var clientId = ConfigurationManager.AppSettings["ClientID"];
+}
+
+<div class="row col-md-4">
+    <div class="col-md-4">
+        <a class="btn btn-primary" href="https://github.com/login/oauth/authorize?scope=user,gist,user:email&client_id=@clientId">Login with GITHUB</a>
+    </div>
+</div>
